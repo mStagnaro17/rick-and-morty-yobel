@@ -1,0 +1,241 @@
+.list-container {
+  background-color: #272b33;
+  color: white;
+  min-height: 100vh;
+}
+
+.content-wrapper, .header-content {
+  max-width: 2200px;
+  margin: 0 auto;
+}
+
+.content-wrapper {
+  padding: 2rem;
+}
+
+.search-header {
+  background-color: #3c3e44;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-decoration: none;
+  color: #f5f5f5;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.search-bar {
+  width: 0;
+  opacity: 0;
+  transition: all 0.4s ease-in-out;
+  overflow: hidden;
+}
+
+.search-bar.visible {
+  width: 300px;
+  opacity: 1;
+}
+
+.search-bar input {
+  width: 100%;
+  font-size: 1rem;
+  color: white;
+  background: none;
+  border: none;
+  border-bottom: 2px solid #ce7b00;
+  outline: none;
+  padding: 0.5rem 0;
+}
+
+.search-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  line-height: 0;
+}
+
+.search-toggle svg {
+  width: 32px;
+  height: 32px;
+  stroke: #f5f5f5;
+  stroke-width: 2;
+  transition: stroke 0.2s;
+}
+
+.search-toggle:hover svg {
+  stroke: #ce7b00;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+  gap: 1.5rem;
+  padding-bottom: 6rem;
+}
+
+.card {
+  display: flex;
+  background-color: #3c3e44;
+  border-radius: 9px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  min-height: 210px;
+  position: relative; 
+}
+
+.card img {
+  width: 200px;
+  object-fit: cover;
+  flex-shrink: 0;
+  border-radius: 9px 0 0 9px;
+}
+
+.card .content {
+
+  padding: 0.75rem 1rem 3rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.pdf-button {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  background-color: #911c12;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.pdf-button:hover {
+  background-color: #da2b1c;
+  transform: scale(1.05);
+}
+
+.card h2 {
+  font-size: 1.4rem;
+  margin: 0;
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+.card .content a {
+  color: white;
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+.card .content a:hover {
+  color: #ce7b00;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: 500;
+  margin-top: 0.25rem;
+  margin-bottom: auto;
+}
+
+.status-dot {
+  height: 0.6rem;
+  width: 0.6rem;
+  border-radius: 50%;
+  margin-right: 0.5rem;
+}
+.status-dot.alive { background-color: #34c720; }
+.status-dot.dead { background-color: #d62a1a; }
+.status-dot.unknown { background-color: #9e9e9e; }
+
+.label {
+  color: #9e9e9e;
+  margin-top: 0.75rem;
+  margin-bottom: 0.25rem;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.value {
+  font-size: 1em;
+  color: #f5f5f5;
+}
+
+.value-location {
+  color: #ce7b00;
+}
+
+.pagination {
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 1rem 0;
+  background-color: #272b33;
+}
+.pagination a, .pagination span {
+  color: white;
+  padding: 8px 16px;
+  text-decoration: none;
+  border: 1px solid #ce7b00;
+  border-radius: 4px;
+  transition: all 0.2s ease-in-out;
+}
+.pagination a:hover {
+  background-color: #ce7b00;
+  color: #272b33;
+}
+.pagination .page-number {
+  background-color: #ce7b00;
+  color: #272b33;
+  font-weight: bold;
+}
+.pagination a.disabled {
+  color: #6d6d6d;
+  border-color: #6d6d6d;
+  pointer-events: none;
+}
+
+@media (max-width: 1000px) {
+  .grid {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+  .card {
+    max-width: 480px;
+  }
+}
+
+@media (max-width: 480px) {
+  .content-wrapper { padding: 1rem; }
+  .grid { grid-template-columns: 1fr; }
+  .card { 
+    flex-direction: column; 
+    max-width: 100%;
+  }
+  .card img { width: 100%; height: 300px; border-radius: 9px 9px 0 0; }
+}

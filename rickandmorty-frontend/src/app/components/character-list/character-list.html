@@ -1,0 +1,51 @@
+<div class="list-container">
+  <header class="search-header">
+    <div class="header-content">
+      <a routerLink="/character" class="logo-title">Personajes de Rick y Morty</a>
+      <div class="search-container">
+        <div class="search-bar" [class.visible]="isSearchVisible">
+          <input type="text" placeholder="Buscar..." [formControl]="searchControl">
+        </div>
+        <button class="search-toggle" (click)="toggleSearch()">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" /></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+  
+  <div *ngIf="data$ | async as data" class="content-wrapper">
+    <div *ngIf="data.response && data.response.results && data.response.results.length > 0" class="grid">
+      <div *ngFor="let character of data.response.results" class="card">
+        <img [src]="character.image" [alt]="character.name">
+        <div class="content">
+          <div>
+            <h2>{{ character.name }}</h2>
+            <p class="status">
+              <span class="status-dot" [ngClass]="character.status.toLowerCase()"></span>
+              {{ character.status }} - {{ character.species }}
+            </p>
+            <p class="label">Last Known Location:</p>
+            <p class="value value-location">{{ character.location.name }}</p>
+            <p class="label">First seen in:</p>
+            <p class="value">{{ character.firstSeenIn }}</p>
+          </div>
+          <button class="pdf-button" (click)="onDownloadPDF(character)">PDF</button>
+        </div>
+      </div>
+    </div>
+    
+    <div *ngIf="!data.response || !data.response.results || data.response.results.length === 0" class="no-results">
+      <h2>No se encontraron resultados</h2>
+      <p>Intenta con otra búsqueda o limpia el filtro.</p>
+    </div>
+
+    <div *ngIf="data.response && data.response.info && data.response.results && data.response.results.length > 0" class="pagination">
+      <a [routerLink]="['/character']" [queryParams]="{ page: 1, search: data.searchTerm || null }" [class.disabled]="data.currentPage === 1"> << </a>
+      <a *ngIf="data.currentPage > 1" [routerLink]="['/character']" [queryParams]="{ page: data.currentPage - 1, search: data.searchTerm || null }"> < </a>
+      <span class="page-number"> {{ data.currentPage }} </span>
+      <a *ngIf="data.currentPage < data.response.info.pages" [routerLink]="['/character']" [queryParams]="{ page: data.currentPage + 1, search: data.searchTerm || null }"> > </a>
+      <a [routerLink]="['/character']" [queryParams]="{ page: data.response.info.pages, search: data.searchTerm || null }" [class.disabled]="data.currentPage === data.response.info.pages"> >> </a>
+    </div>
+
+  </div>
+</div>

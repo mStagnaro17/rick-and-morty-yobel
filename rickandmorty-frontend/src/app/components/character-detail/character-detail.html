@@ -1,0 +1,26 @@
+<a routerLink="/character" class="back-button">← Volver a la lista</a>
+
+<div *ngIf="character$ | async as character" class="container">
+  
+  <div class="detail-card">
+    <img [src]="character.image" [alt]="character.name">
+
+    <div class="content">
+      <h1>{{ character.name }}</h1>
+      
+      <p class="status">
+        <span class="status-dot" [ngClass]="character.status.toLowerCase()"></span>
+        {{ character.status }} - {{ character.species }}
+      </p>
+
+      <p class="label">Last known location:</p>
+      <p class="value">{{ character.location.name }}</p>
+
+      <p class="label">First seen in:</p>
+      <!-- Nota: Por ahora mostramos la URL del primer episodio. Refinar esto requiere otra llamada a la API. -->
+      <p class="value">{{ character.episode[0] }}</p>
+
+    </div>
+  </div>
+
+</div>
